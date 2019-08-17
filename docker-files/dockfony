@@ -77,6 +77,7 @@ showHelp() {
 
     commands="${COL_LYELLOW}Commands:\n${COL_RESET}"
     commands="$commands  composer <cmds>             Run Composer in ${COL_MAGENTA}${CONTAINER_APP}${COL_RESET} container\n"
+    commands="$commands  console <cmds>              Run Symfony console in ${COL_MAGENTA}${CONTAINER_APP}${COL_RESET} container\n"
     commands="$commands  mysql                       Run MySQL CLI in ${COL_MAGENTA}${CONTAINER_MYSQL}${COL_RESET} container\n"
     commands="$commands  dump (autoload)             Performs composer dump-autoload in ${COL_MAGENTA}${CONTAINER_APP}${COL_RESET} container\n"
     commands="$commands  exec <container>            Execute a command in a running container\n"
@@ -100,6 +101,7 @@ showHelp() {
     examples="$examples  ${COL_CYAN}$ ./dockfony dump${COL_RESET}\n"
     examples="$examples  ${COL_CYAN}$ ./dockfony logs # all container logs${COL_RESET}\n"
     examples="$examples  ${COL_CYAN}$ ./dockfony composer require <vendor/package>${COL_RESET}\n"
+    examples="$examples  ${COL_CYAN}$ ./dockfony console cache:clear${COL_RESET}\n"
     examples="$examples  ${COL_CYAN}$ ./dockfony mysql${COL_RESET}\n"
     examples="$examples  ${COL_CYAN}$ ./dockfony test --filter=MyFilter${COL_RESET}\n"
 
@@ -208,6 +210,21 @@ if [ $# -gt 0 ]; then
             $COMPOSE run --rm \
                 app \
                 composer "$@"
+        fi
+
+    # If "console" is used, pass-thru to "bin/console"
+    # inside a new container
+    elif [ "$1" == "console" ]; then
+        shift 1
+        if [ "$EXEC" == "yes" ]; then
+            $COMPOSE exec \
+                -u dockfony \
+                app \
+                php bin/console "$@"
+        else
+            $COMPOSE run --rm \
+                app \
+                php bin/console "$@"
         fi
 
     # If "test" is used, run unit tests,
