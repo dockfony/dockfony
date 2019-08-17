@@ -62,7 +62,7 @@ export MYSQL_PORT=${MYSQL_PORT:-3306}
 export WWWUSER=${WWWUSER:-$UID}
 
 showVersion() {
-    intro="\n${COL_GREEN}Dockfony for Docker${COL_RESET}\n"
+    intro="\n${COL_GREEN}Dockfony, Docker for Symfony projects${COL_RESET}\n"
     intro="$intro   ${COL_CYAN}Version ${VERSION}\n${COL_RESET}"
 
     printf "$intro"
