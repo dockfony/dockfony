@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 LABEL maintainer="Chris Fidao"
 
-RUN useradd -ms /bin/bash -u 1337 vessel
+RUN useradd -ms /bin/bash -u 1337 dockfony
 WORKDIR /var/www/html
 
 ENV TZ=UTC
@@ -39,7 +39,7 @@ COPY h5bp /etc/nginx/h5bp
 COPY default /etc/nginx/sites-available/default
 COPY php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY xdebug.ini /etc/php/7.3/mods-available/xdebug.ini
-COPY vessel.ini /etc/php/7.3/fpm/conf.d/99-vessel.ini
+COPY dockfony.ini /etc/php/7.3/fpm/conf.d/99-dockfony.ini
 
 EXPOSE 80
 
