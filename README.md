@@ -10,19 +10,33 @@ They did fantastic work and this repository is simply a conversion to handle Sym
 
 ## Install
 
-Dockfony is just a small set of files that sets up a local Docker-based dev environment per project. There is nothing to install globally, except Docker itself!
+Dockfony is, like Vessel, a set of files that sets up a local Docker-based dev environment per project.
+
+It is part of the [Symfony Recipes (Contrib](https://github.com/symfony/recipes-contrib/blob/master/README.rst) system which sets up a lot of the files for you. However, you need to enable the contrib repository (see below). 
 
 This is all there is to using it:
 
 ```bash
-composer req dockfony
+composer config extra.symfony.allow-contrib true. # Optional, but recommended:
 
-bash dockfony init
+composer req --dev "dockfony/dockfony:^5.0"
 
 ./dockfony start
 ```
 
 Head to `http://localhost` in your browser and see your Symfony site!
+
+## Environment Variables
+
+These environment variables are the basics required to run, or will be created by Symfony Flex if you allow third party contributors:
+
+```bash
+DB_DATABASE=symfony
+DB_USERNAME=symfony
+DB_PASSWORD=secret
+REDIS_HOST=redis
+REDIS_PORT=6379
+```
 
 ## Multiple Environments
 
