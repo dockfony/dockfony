@@ -235,11 +235,11 @@ if [ $# -gt 0 ]; then
             $COMPOSE exec \
                 -u dockfony \
                 app \
-                ./vendor/bin/phpunit "$@"
+                ./bin/phpunit "$@"
         else
             $COMPOSE run --rm \
                 app \
-                ./vendor/bin/phpunit "$@"
+                ./bin/phpunit "$@"
         fi
 
     # If "node" is used, run node
