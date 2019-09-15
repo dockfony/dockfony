@@ -46,9 +46,11 @@ services:
   redis:
     image: redis:alpine
     volumes:
-     - dockfonyredis:/data
+      - dockfonyredis:/data
     networks:
-     - dockfony
+      - dockfony
+    ports:
+      - "${REDIS_PORT}:6379"
 networks:
   dockfony:
     driver: "bridge"
